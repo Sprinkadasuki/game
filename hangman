@@ -1,0 +1,44 @@
+import java.util.Scanner;
+
+public class GuessTheWord {
+
+    public static void main(String[] args) {
+        String secretWord = "programming";
+        char[] guessWord = new char[secretWord.length()];
+        for (int i = 0; i < guessWord.length; i++) {
+            guessWord[i] = '_';
+        }
+
+        Scanner scanner = new Scanner(System.in);
+
+        int attempts = 0;
+        boolean wordGuessed = false;
+
+        while (!wordGuessed && attempts < secretWord.length()) {
+            System.out.print("Guess a letter: ");
+
+            char guess = scanner.next().charAt(0);
+            attempts++;
+
+            for (int i = 0; i < secretWord.length(); i++) {
+                if (secretWord.charAt(i) == guess) {
+                    guessWord[i] = guess;
+                }
+            }
+
+            if (String.valueOf(guessWord).equals(secretWord)) {
+                wordGuessed = true;
+            }
+
+            System.out.println("Current guess: " + String.valueOf(guessWord));
+        }
+
+        scanner.close();
+
+        if (wordGuessed) {
+            System.out.println("Congratulations! You guessed the word.");
+        } else {
+            System.out.println("Out of attempts. The word was: " + secretWord);
+        }
+    }
+}
